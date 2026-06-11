@@ -1,5 +1,5 @@
 /* ==========================================================================
-   1. CONFIGURACIÓN GENERAL Y TIPOGRAFÍA
+   1. CONFIGURACIÓN GENERAL Y VARIABLES
    ========================================================================== */
 * {
     margin: 0;
@@ -14,7 +14,7 @@ html {
 }
 
 body {
-    background-color: #fcfaf2; /* Fondo arena/beige muy suave de la marca */
+    background-color: #fcfaf2; /* Fondo arena/beige suave de la marca */
     color: #2c3e50;
     overflow-x: hidden;
 }
@@ -52,11 +52,17 @@ body {
     color: #2c5270; /* Azul Sereno */
 }
 
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
 .nav-links a {
     text-decoration: none;
     color: #2c3e50;
-    margin-left: 25px;
+    margin-left: 30px;
     font-weight: 600;
+    font-size: 1rem;
     transition: color 0.3s;
 }
 
@@ -65,21 +71,24 @@ body {
 }
 
 /* ==========================================================================
-   3. SECCIÓN HERO (PORTADA FULL SCREEN)
+   3. SECCIÓN HERO (PORTADA INTEGRADA DE PANTALLA COMPLETA)
    ========================================================================== */
 .hero-fullscreen {
     position: relative;
-    min-height: 100vh; /* Ocupa el 100% del alto de la pantalla del navegador */
-    background-image: url('img/banner-imagen.jpg'); /* Tu foto cubre todo el fondo */
-    background-size: cover; /* Se estira proporcionalmente sin deformarse */
-    background-position: center center; /* Mantiene fijas las caras de la foto */
+    width: 100%;
+    min-height: 90vh; /* Ocupa casi la totalidad del alto de la pantalla */
+    
+    /* Llamamos la imagen de fondo de forma adaptativa */
+    background-image: url('img/banner-imagen.jpg'); 
+    background-size: cover; /* La imagen se estira proporcionalmente cubriendo todo */
+    background-position: center center; /* Centra los rostros de la foto */
     background-repeat: no-repeat;
+    
     display: flex;
-    align-items: center; /* Centrado vertical del contenido */
-    padding: 0;
+    align-items: center; /* Centrado vertical del bloque de texto */
 }
 
-/* Capa de degradado sutil sobre la foto para unificar tonos con el fondo arena */
+/* Capa overlay degradada: oscurece el fondo hacia la izquierda para que el texto resalte */
 .hero-fullscreen::before {
     content: '';
     position: absolute;
@@ -87,55 +96,52 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, rgba(252, 250, 242, 0.3), rgba(252, 250, 242, 0.1));
+    background: linear-gradient(to right, rgba(252, 250, 242, 0.7) 30%, rgba(252, 250, 242, 0.2) 100%);
     z-index: 1;
 }
 
-/* Contenedor del texto superpuesto alineado a la izquierda */
+/* Contenedor del texto alineado a la izquierda */
 .hero-content-over-image {
     position: relative;
-    z-index: 2; /* Por encima del fondo y de la capa decorativa */
+    z-index: 2; /* Se posiciona arriba de la capa overlay */
     width: 100%;
     max-width: 1300px;
     margin: 0 auto;
     padding: 0 50px;
     display: flex;
-    justify-content: flex-start; /* Alinea la caja de texto a la izquierda como la maqueta */
+    justify-content: flex-start; /* Alinea la caja a la izquierda exacta de la pantalla */
 }
 
-/* Caja contenedora del texto con transparencia limpia */
+/* Caja de texto sin fondos rígidos, integrada orgánicamente a la imagen */
 .hero-text-block {
-    max-width: 650px; /* Ancho controlado para que no tape toda la foto */
-    background-color: rgba(252, 250, 242, 0.85); /* Beige translúcido que asegura legibilidad */
-    padding: 50px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    max-width: 650px; /* Evita que el texto invada la zona de las caras en la foto */
     text-align: left;
 }
 
 .hero-text-block h1 {
-    font-size: 3.2rem;
+    font-size: 3.5rem; /* Tamaño de impacto idéntico a la maqueta */
     color: #2c3e50;
-    line-height: 1.1;
+    line-height: 1.15;
     margin-bottom: 20px;
+    font-weight: 700;
 }
 
 .slogan {
-    font-size: 1.6rem;
-    color: #346585; /* Azul intermedio */
+    font-size: 1.75rem;
+    color: #346585; /* Tono azul intermedio */
     font-style: italic;
     margin-bottom: 20px;
     font-weight: 600;
 }
 
 .description {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     line-height: 1.6;
-    margin-bottom: 35px;
-    color: #444;
+    margin-bottom: 40px;
+    color: #333;
 }
 
-/* BOTÓN DE ACCIÓN (AZUL SERENO) */
+/* BOTÓN DE ACCIÓN PRINCIPAL (AZUL SERENO) */
 .btn-cta {
     display: inline-block;
     padding: 18px 35px;
@@ -144,8 +150,8 @@ body {
     text-decoration: none;
     font-weight: bold;
     border-radius: 8px;
-    font-size: 1.15rem;
-    box-shadow: 0 4px 15px rgba(74, 124, 157, 0.25);
+    font-size: 1.2rem;
+    box-shadow: 0 4px 15px rgba(74, 124, 157, 0.3);
     transition: background 0.3s, transform 0.2s;
     border: none;
 }
@@ -160,7 +166,7 @@ body {
    ========================================================================== */
 .services {
     padding: 100px 50px;
-    background-color: #ffffff; /* Fondo blanco para dar respiro visual */
+    background-color: #ffffff; /* Fondo blanco para generar un corte limpio */
     text-align: center;
 }
 
@@ -244,7 +250,7 @@ body {
    ========================================================================== */
 .footer {
     padding: 80px 50px 40px;
-    background-color: #2c3e50; /* Fondo oscuro institucional */
+    background-color: #2c3e50; /* Gris azulado institucional */
     color: white;
     text-align: center;
 }
@@ -273,7 +279,7 @@ body {
 
 .footer-info i {
     margin-right: 10px;
-    color: #7a9a60; /* Iconos en Verde Oliva */
+    color: #7a9a60; /* Verde Oliva en iconos */
 }
 
 .copyright {
@@ -283,7 +289,7 @@ body {
 }
 
 /* ==========================================================================
-   7. BOTÓN FLOTANTE WHATSAPP (CONVERTIDOR NATIVO)
+   7. BOTÓN FLOTANTE WHATSAPP
    ========================================================================== */
 .whatsapp-float {
     position: fixed;
@@ -311,19 +317,23 @@ body {
 }
 
 /* ==========================================================================
-   8. MEDIA QUERIES (DISEÑO RESPONSIVO ADAPTATIVO)
+   8. MEDIA QUERIES (RESPONSIVE SEGURO PARA DISPOSITIVOS)
    ========================================================================== */
 @media (max-width: 992px) {
     .hero-content-over-image {
-        padding: 0 20px;
-        justify-content: center; /* En tablets se centra el bloque */
+        padding: 0 30px;
+        justify-content: center; /* En tablets centra el bloque para mejor lectura */
+    }
+    .hero-fullscreen::before {
+        /* Degradado completo en pantallas medianas para asegurar contraste */
+        background: rgba(252, 250, 242, 0.75); 
     }
     .hero-text-block {
         max-width: 90%;
         text-align: center;
     }
     .hero-text-block h1 {
-        font-size: 2.8rem;
+        font-size: 3rem;
     }
 }
 
@@ -345,17 +355,20 @@ body {
     .hero-fullscreen {
         min-height: auto;
         padding: 80px 0;
-        background-position: center top; /* Evita que se recorten los rostros en celulares */
+        background-position: center top; /* Evita recortar los rostros en móviles */
+    }
+    .hero-fullscreen::before {
+        background: rgba(252, 250, 242, 0.85); /* Mayor contraste en celular */
     }
     .hero-text-block {
-        padding: 30px 20px;
-        background-color: rgba(252, 250, 242, 0.95); /* Menos transparencia en móvil */
+        padding: 10px;
+        text-align: center;
     }
     .hero-text-block h1 {
-        font-size: 2.2rem;
+        font-size: 2.3rem;
     }
     .slogan {
-        font-size: 1.35rem;
+        font-size: 1.4rem;
     }
     .description {
         font-size: 1.1rem;
