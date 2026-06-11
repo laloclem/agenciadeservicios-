@@ -13,6 +13,7 @@ html {
 body {
     background-color: #fcfaf2; /* Fondo arena/beige muy suave */
     color: #2c3e50;
+    overflow-x: hidden; /* Evita desbordamientos laterales no deseados */
 }
 
 /* BARRA DE NAVEGACIÓN */
@@ -35,7 +36,9 @@ body {
 }
 
 .logo-img {
-    height: 50px; /* Ajusta según tu imagen */
+    height: 50px; /* Ajusta según el alto de tu isotipo */
+    width: auto;
+    object-fit: contain;
 }
 
 .logo-text {
@@ -63,6 +66,8 @@ body {
     align-items: center;
     min-height: 80vh;
     gap: 40px;
+    max-width: 1200px; /* Evita que se deforme en pantallas gigantes */
+    margin: 0 auto;
 }
 
 .hero-content {
@@ -100,11 +105,13 @@ body {
     font-weight: bold;
     border-radius: 8px;
     font-size: 1.1rem;
-    transition: background 0.3s;
+    box-shadow: 0 4px 6px rgba(74, 124, 157, 0.2);
+    transition: background 0.3s, transform 0.2s;
 }
 
 .btn-cta:hover {
     background-color: #346585;
+    transform: translateY(-2px);
 }
 
 .hero-image {
@@ -115,7 +122,9 @@ body {
 
 .hero-image img {
     max-width: 100%;
+    height: auto;
     border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
 }
 
 /* SECCIÓN SERVICIOS */
@@ -133,20 +142,27 @@ body {
 
 .services-grid {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap; /* Permite adaptación limpia en pantallas medianas */
     gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .service-card {
     background-color: #fcfaf2;
-    padding: 40px 20px;
+    padding: 40px 24px;
     border-radius: 12px;
     flex: 1;
-    transition: transform 0.3s;
+    min-width: 280px; /* Impide que las tarjetas colapsen horizontalmente */
+    max-width: 360px;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .service-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
 .service-icon {
@@ -191,7 +207,7 @@ body {
 
 /* FOOTER Y CONTACTO */
 .footer {
-    padding: 60px 50px 20px;
+    padding: 60px 50px 30px;
     background-color: #2c3e50;
     color: white;
     text-align: center;
@@ -229,15 +245,15 @@ body {
     position: fixed;
     width: 60px;
     height: 60px;
-    bottom: 40px;
-    right: 40px;
+    bottom: 30px;
+    right: 30px;
     background-color: #25d366;
     color: #FFF;
     border-radius: 50px;
     text-align: center;
     font-size: 30px;
-    box-shadow: 2px 2px 3px #999;
-    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 1000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -249,12 +265,54 @@ body {
     transform: scale(1.1);
 }
 
-/* RESPONSIVE SENCILLO PARA CELULARES */
+/* DISEÑO RESPONSIVO PARA TABLETS Y CELULARES */
 @media (max-width: 768px) {
-    .navbar { padding: 20px; flex-direction: column; gap: 15px; }
-    .nav-links a { margin: 0 10px; }
-    .hero { flex-direction: column; padding: 30px 20px; }
-    .hero-content h1 { font-size: 2rem; }
-    .services-grid { flex-direction: column; }
-    .footer-info { flex-direction: column; gap: 15px; }
+    .navbar { 
+        padding: 20px; 
+        flex-direction: column; 
+        gap: 15px; 
+    }
+    .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    .nav-links a { 
+        margin-left: 0; 
+    }
+    .hero { 
+        flex-direction: column-reverse; /* La imagen sube y el texto baja para mejor lectura */
+        padding: 40px 20px; 
+        text-align: center;
+    }
+    .hero-content h1 { 
+        font-size: 2rem; 
+    }
+    .slogan {
+        font-size: 1.3rem;
+    }
+    .services {
+        padding: 50px 20px;
+    }
+    .service-card {
+        max-width: 100%; /* Las tarjetas toman todo el ancho disponible en celular */
+    }
+    .about {
+        padding: 50px 20px;
+    }
+    .footer {
+        padding: 40px 20px 20px;
+    }
+    .footer-info { 
+        flex-direction: column; 
+        gap: 15px; 
+    }
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 24px;
+    }
 }
